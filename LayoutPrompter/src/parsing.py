@@ -1,7 +1,8 @@
 import re
 
-import openai
 import torch
+import openai
+from openai.types.chat import ChatCompletion
 
 from utils import CANVAS_SIZE, ID2LABEL
 
@@ -61,10 +62,11 @@ class Parser:
         return labels, bboxes
 
     def __call__(self, predictions):
-        if isinstance(predictions, openai.types.completion.Completion):
-            predictions = predictions.choices
-        if isinstance(predictions[0], openai.types.completion_choice.CompletionChoice):
-            predictions = [prediction.text for prediction in predictions]
+        if isinstance(predictions, ChatCompletion):
+            predictions = [choice.message.content for choice in predictions.choices]
+
+        elif isinstance(predictions, openai.types.completion.Completion):
+            predictions = [choice.text for choice in predictions.choices]
 
         parsed_predictions = []
         for prediction in predictions:
