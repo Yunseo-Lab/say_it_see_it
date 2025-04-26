@@ -368,8 +368,19 @@ class TextToLayoutProcessor(Processor):
         return elements
 
     def __call__(self, data):
+        # Check if data is a string
+        if isinstance(data, str): # 자유 쿼리에 대해서 처리하도록 if문을 추가
+            text = clean_text(data)
+            # GPU와 CPU의 임베딩 차원 크기가 다르기 때문에 자료형을 명시
+            embedding = self.text_encoder(clean_text(data, remove_summary=True)).to(torch.float16)
+            return {
+                "text": text,
+                "embedding": embedding,
+            }
+        
+        # Original behavior for non-string data
         text = clean_text(data["text"])
-        embedding = self.text_encoder(clean_text(data["text"], remove_summary=True))
+        embedding = self.text_encoder(clean_text(data["text"], remove_summary=True)).to(torch.float16)
         original_width = data["canvas_width"]
         elements = data["elements"]
         elements = self._scale(original_width, elements)
