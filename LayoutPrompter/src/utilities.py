@@ -90,9 +90,9 @@ def read_json(filename):
     return data
 
 
-def read_pt(filename):
+def read_pt(filename, map_location="cuda"):
     with open(filename, "rb") as f:
-        return torch.load(f)
+        return torch.load(f, map_location=torch.device(map_location))
 
 
 def write_pt(filename, obj):

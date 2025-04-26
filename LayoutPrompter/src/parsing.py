@@ -4,7 +4,7 @@ import torch
 import openai
 from openai.types.chat import ChatCompletion
 
-from utils import CANVAS_SIZE, ID2LABEL
+from .utilities import CANVAS_SIZE, ID2LABEL
 
 
 class Parser:

@@ -1,5 +1,5 @@
-from transforms import RelationTypes
-from utils import CANVAS_SIZE, ID2LABEL, LAYOUT_DOMAIN
+from .transforms import RelationTypes
+from .utilities import CANVAS_SIZE, ID2LABEL, LAYOUT_DOMAIN
 
 PREAMBLE = (
     "Please generate a layout based on the given information. "
@@ -481,7 +481,7 @@ def build_prompt(
 if __name__ == "__main__":
     import torch
 
-    from utils import ID2LABEL
+    from utilities import ID2LABEL
 
     ls = RefinementSerializer(
         input_format="seq",

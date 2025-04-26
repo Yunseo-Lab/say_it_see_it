@@ -1,6 +1,6 @@
 import torch
 
-from utils import (
+from .utilities import (
     compute_alignment,
     compute_maximum_iou,
     compute_overlap,

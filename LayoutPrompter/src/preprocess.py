@@ -6,7 +6,7 @@ import torch
 import torchvision.transforms as T
 from pandas import DataFrame
 
-from transforms import (
+from .transforms import (
     AddCanvasElement,
     AddGaussianNoise,
     AddRelation,
@@ -17,7 +17,7 @@ from transforms import (
     SaliencyMapToBBoxes,
     ShuffleElements,
 )
-from utils import CANVAS_SIZE, ID2LABEL, clean_text
+from .utilities import CANVAS_SIZE, ID2LABEL, clean_text
 
 
 class Processor:
