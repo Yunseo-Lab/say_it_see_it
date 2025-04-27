@@ -131,22 +131,24 @@ class TextToLayoutPipeline:
     def visualize(self, ranked_with_contents):
         images = self.visualizer(ranked_with_contents)
         grid_img = create_image_grid(images)
-        grid_img.save("output_grid.png")
+        # Create output directory and save path
+        output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "output_poster.png")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        grid_img.save(output_path)
 
-    def run(self, test_idx=0):
+    def run(self, test_idx=0, user_text:str = None):
         train = self.get_processed_data("train")
         _ = self.get_processed_data("val")
         # test = self.get_processed_data("test")
         
-        text = "I'm going to put a title in the top left corner and a short caption below it, and both the title and caption should only occupy the left half of the screen. The name of the organization should be placed in the bottom right corner. poster is about ghana chocolate."
-        test = [self.processor(text)]
+        test = [self.processor(user_text)]
 
         exemplars = self.select_exemplars(train, test[test_idx])
         prompt = self.build_prompt(exemplars, test[test_idx])
         response = self.call_model(prompt)
         parsed = self.parse_response(response)
         ranked = self.rank_layouts(parsed)
-        ranked_with_contents = self.generate_content(ranked, text)
+        ranked_with_contents = self.generate_content(ranked, user_text)
 
         # visualize엔 content 포함된 리스트 전달
         self.visualize(ranked_with_contents)
@@ -154,4 +156,6 @@ class TextToLayoutPipeline:
 
 if __name__ == "__main__":
     pipeline = TextToLayoutPipeline()
-    pipeline.run(test_idx=0)
+
+    user_text = "I'm going to put a title in the top left corner and a short caption below it, and both the title and caption should only occupy the left half of the screen. The name of the organization should be placed in the bottom right corner. poster is about ghana chocolate."
+    pipeline.run(user_text=user_text)
