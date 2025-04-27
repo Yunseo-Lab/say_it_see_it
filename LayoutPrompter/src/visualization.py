@@ -3,9 +3,12 @@ import os
 import numpy as np
 import seaborn as sns
 import torch
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from .utilities import CANVAS_SIZE, ID2LABEL, RAW_DATA_PATH
+
+# 한글 지원 폰트 경로 (시스템에 설치된 경로로 수정 가능)
+FONT_PATH = "/usr/share/fonts/truetype/nanum/NanumGothicCoding.ttf"
 
 
 class Visualizer:
@@ -15,18 +18,22 @@ class Visualizer:
         self.canvas_width, self.canvas_height = CANVAS_SIZE[self.dataset]
         self._colors = None
 
-    def draw_layout(self, labels: torch.Tensor, bboxes: torch.Tensor):
+    def draw_layout(self, labels: torch.Tensor, bboxes: torch.Tensor, texts=None):
         _canvas_width = self.canvas_width * self.times
         _canvas_height = self.canvas_height * self.times
         img = Image.new("RGB", (_canvas_width, _canvas_height), color=(255, 255, 255))
         draw = ImageDraw.Draw(img, "RGBA")
+        margin = 2
         labels = labels.tolist()
         bboxes = bboxes.tolist()
         areas = [bbox[2] * bbox[3] for bbox in bboxes]
         indices = sorted(range(len(areas)), key=lambda i: areas[i], reverse=True)
+        has_ttf = os.path.exists(FONT_PATH)
+        base_font_size = int(12 * self.times)
 
         for i in indices:
             bbox, label = bboxes[i], labels[i]
+            text = texts[i] if texts is not None else None
             color = self.colors[label]
             c_fill = color + (100,)
             x1, y1, x2, y2 = bbox
@@ -35,6 +42,18 @@ class Visualizer:
             x1, x2 = x1 * _canvas_width, x2 * _canvas_width
             y1, y2 = y1 * _canvas_height, y2 * _canvas_height
             draw.rectangle([x1, y1, x2, y2], outline=color, fill=c_fill)
+            if text:
+                if has_ttf:
+                    max_w = x2 - x1 - 2 * margin
+                    max_h = y2 - y1 - 2 * margin
+                    fsize = min(base_font_size, int(max_h))
+                    f = ImageFont.truetype(FONT_PATH, fsize)
+                    while f.getlength(text) > max_w and fsize > 6:
+                        fsize -= 1
+                        f = ImageFont.truetype(FONT_PATH, fsize)
+                else:
+                    f = ImageFont.load_default()
+                draw.text((x1 + margin, y1 + margin), text, fill=(0,0,0), font=f)
         return img
 
     @property
@@ -48,8 +67,12 @@ class Visualizer:
     def __call__(self, predictions):
         images = []
         for prediction in predictions:
-            labels, bboxes = prediction
-            img = self.draw_layout(labels, bboxes)
+            labels, bboxes = prediction['labels'], prediction['bboxes']
+            content = prediction['content']
+            label_names = [ID2LABEL[self.dataset].get(l, str(l)) for l in labels.tolist()]
+            texts = [content.get(name, "") for name in label_names]
+
+            img = self.draw_layout(labels, bboxes, texts)
             images.append(img)
         return images
 
