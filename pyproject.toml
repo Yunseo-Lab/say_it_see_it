@@ -8,6 +8,7 @@ dependencies = [
     "clip",
     "dotenv>=0.9.9",
     "gradio>=5.27.0",
+    "langchain-teddynote>=0.3.45",
     "openai>=1.76.0",
     "opencv-contrib-python>=4.11.0.86",
     "opencv-python>=4.11.0.86",
