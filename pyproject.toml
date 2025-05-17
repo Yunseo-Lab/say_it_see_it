@@ -5,9 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "bs4>=0.0.2",
     "clip",
     "dotenv>=0.9.9",
     "gradio>=5.27.0",
+    "ipykernel>=6.29.5",
+    "langchain-openai>=0.3.16",
     "langchain-teddynote>=0.3.45",
     "openai>=1.76.0",
     "opencv-contrib-python>=4.11.0.86",
