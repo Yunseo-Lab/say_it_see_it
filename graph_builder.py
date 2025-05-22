@@ -13,9 +13,9 @@ drawer_tool_node = ToolNode(tools=drawer_tools)
 graph_builder = StateGraph(State)
 
 # Add nodes
+graph_builder.add_node("designer", designer)
 graph_builder.add_node("background", background_node)
 graph_builder.add_node("layout", layout_node)
-graph_builder.add_node("designer", designer)
 graph_builder.add_node("drawer", drawer)
 graph_builder.add_node("designer_tool", designer_tool_node)
 graph_builder.add_node("drawer_tool", drawer_tool_node)

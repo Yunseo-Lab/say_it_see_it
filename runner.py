@@ -20,11 +20,17 @@ def main(canvas_size: tuple, question: str, open_browser: bool = True):
     for event in graph.stream(initial_state, config=config):
         for value in event.values():
             value["messages"][-1].pretty_print()
+
     # Final output
     state = graph.get_state({"configurable": {"thread_id": "1"}})
     final_output = state.values["messages"][-1].content
+    
     # Save & open HTML
     generate_and_save_html(final_output, open_browser=open_browser)
+
+    # Print final output
+    print(state.values)
+
 
 
 if __name__ == "__main__":

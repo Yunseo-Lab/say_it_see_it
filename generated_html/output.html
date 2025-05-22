@@ -1,45 +1,71 @@
-<div>
- ` to apply the linear gradient background.
-
-2. **Title**:
-   - Positioned at the top left corner with a width of 1200 pixels and height of 200 pixels.
-
-3. **Description**:
-   - Positioned directly below the title, starting at y=200 pixels with a height of 400 pixels.
-
-4. **Icon**:
-   - Positioned towards the right side of the layout at x=1000 pixels, with a width and height of 150 pixels.
-
-### HTML Structure:
-
-```html
- <div style="background-image: linear-gradient(to right, #FF7E5F, #FEB47B); position:relative; width:1200px; height:600px;">
-  <div style="position:absolute; left:0px; top:0px; width:1200px; height:200px;">
-   <h1 style="margin: 0; padding: 20px; color: white; text-align: center;">
-    Your Title Here
-   </h1>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   옥수수 수염차 홍보 포스터
+  </title>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .background {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #F9E79F; /* 배경 색상 */
+            background-image: url('your-wave-pattern-url.jpg'); /* 물결무늬 배경 이미지 */
+            background-size: cover; /* 배경 이미지 크기 조정 */
+        }
+        .title {
+            font-weight: bold;
+            font-family: 'Noto Serif KR', serif;
+            color: #A9DFBF;
+        }
+        .attention {
+            font-weight: normal;
+            color: #FFD700;
+        }
+        .description {
+            font-weight: normal;
+            color: #A9DFBF;
+        }
+        .call_to_action {
+            font-weight: bold;
+            color: #FFD700;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="background">
+   <div class="title" style="position:absolute; left:20px; top:20px; width:760px; height:80px;">
+    옥수수 수염차 - 자연에서 온 건강한 선택
+   </div>
+   <div class="attention" style="position:absolute; left:20px; top:120px; width:760px; height:100px;">
+    자연의 신선함을 경험하세요!
+   </div>
+   <div class="description" style="position:absolute; left:20px; top:230px; width:760px; height:150px;">
+    옥수수 수염차는 면역력을 높이고 소화에 도움을 주며 피로 회복에 기여합니다. 
+            자연의 순수함을 느껴보세요!
+   </div>
+   <div style="position:absolute; left:20px; top:400px; width:200px; height:160px;">
+    <img alt="옥수수 아이콘" src="your-corn-icon-url.png" style="width:100%; height:100%;"/>
+   </div>
+   <div class="call_to_action" style="position:absolute; left:240px; top:400px; width:540px; height:80px;">
+    지금 바로 옥수수 수염차를 만나보세요!
+   </div>
   </div>
-  <div style="position:absolute; left:0px; top:200px; width:1200px; height:400px;">
-   <p style="margin: 20px; color: white; font-size: 18px;">
-    Your description goes here. It can include various details about the topic.
-   </p>
-  </div>
-  <div style="position:absolute; left:1000px; top:50px; width:150px; height:150px;">
-   <img alt="Icon" src="your-icon-url.png" style="width:100%; height:100%;"/>
-  </div>
- </div>
- ```
+ </body>
+</html>
+<div class="background">
+ ` 요소가 추가됩니다. 지정된 색상과 물결 무늬 배경 이미지가 사용됩니다.
+2. **제목**: `title` 클래스는 포스터의 제목을 스타일링합니다.
+3. **주의사항 및 설명**: `attention`, `description` 클래스를 가진 텍스트 블록이 고객의 관심을 끌고 정보를 전달합니다.
+4. **이미지 아이콘**: 옥수수 아이콘을 위한 `
+ <img/>
+ ` 태그가 포함되어 있습니다.
+5. **행동 촉구 텍스트**: `call_to_action` 클래스를 가진 블록이 사용되어 고객에게 행동을 유도합니다.
 
-### Explanation:
-
-- The outer `
- <div>
-  ` has a linear gradient background that spans the width and height specified.
-- The title and description are structured with absolute positioning to ensure they occupy their designated areas without affecting each other.
-- An `
-  <img/>
-  ` element is used for the icon, styled to fit perfectly within the defined dimensions.
-
-Feel free to modify the content and URLs as necessary! If you have any more requests or adjustments, let me know!
- </div>
+각 요소는 주어진 좌표에 따라 배치됩니다. 필요에 따라 아이콘과 배경 이미지 URL을 삽입하고, 추가적인 CSS 스타일을 조정하여 디자인을 개선할 수 있습니다.
 </div>

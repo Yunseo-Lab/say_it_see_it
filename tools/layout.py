@@ -1,3 +1,7 @@
+# DEPRECATED: This tool is deprecated and will be removed in future versions.
+# Please use the new tool system for layout generation.
+
+
 from langchain_core.tools import tool
 from typing import List, Dict
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
