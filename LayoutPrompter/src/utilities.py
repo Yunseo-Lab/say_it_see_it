@@ -57,7 +57,7 @@ CANVAS_SIZE = {
     "rico": (90, 160),
     "publaynet": (120, 160),
     "posterlayout": (102, 150),
-    "webui": (120, 120),
+    "webui": (240, 120),
 }
 
 

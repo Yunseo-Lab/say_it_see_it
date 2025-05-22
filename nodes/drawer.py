@@ -10,7 +10,7 @@ from utils import load_system_template
 
 def drawer(state: State) -> State:
     """그림을 생성하는 노드 함수"""
-    system_template = load_system_template("/Users/localgroup/Documents/workspace/say_it_see_it/prompts/drawer_prompt.yaml")
+    system_template = load_system_template("prompts/drawer_prompt.yaml")
 
     canvas_size = state.get("canvas_size", (800, 600))
     design_spec = state.get("design_spec", {})

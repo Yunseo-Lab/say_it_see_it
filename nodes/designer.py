@@ -41,9 +41,9 @@ def designer(state: State) -> State:
     LLM에게 구조화된 출력을 요청하고 Pydantic 모델로 파싱하여 반환합니다.  
     """  
     # 시스템 프롬프트 로드  
-    system_template: str = load_system_template(  
-        "/Users/localgroup/Documents/workspace/say_it_see_it/prompts/designer_prompt.yaml"  
-    )  
+    system_template: str = load_system_template(
+        "prompts/designer_prompt.yaml"
+    )
   
     # 프롬프트 구성  
     prompt = ChatPromptTemplate.from_messages([  

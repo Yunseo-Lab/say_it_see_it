@@ -32,7 +32,7 @@ def layout_node(state: State) -> State:
     canvas_size = state.get("canvas_size", (800, 600))
       
     # 시스템 템플릿 로드  
-    system_template = load_system_template("prompts/layout_prompt.yaml")  
+    system_template = load_system_template("/Users/localgroup/Documents/workspace/say_it_see_it/prompts/layout_prompt.yaml")  
       
     # 프롬프트 준비 - layout_concept과 canvas_size 추가  
     prompt = ChatPromptTemplate.from_messages([  

@@ -138,7 +138,7 @@ class TextToLayoutPipeline:
 
     def run(self, test_idx=0, user_text:str = None):
         train = self.get_processed_data("train")
-        _ = self.get_processed_data("val")
+        # _ = self.get_processed_data("val")
         # test = self.get_processed_data("test")
         
         test = [self.processor(user_text)]
@@ -153,9 +153,12 @@ class TextToLayoutPipeline:
         # visualize엔 content 포함된 리스트 전달
         self.visualize(ranked_with_contents)
 
+        return ranked_with_contents[0]
+
 
 if __name__ == "__main__":
-    pipeline = TextToLayoutPipeline()
+    pipeline = TextToLayoutPipeline(dataset="webui")
 
     user_text = "I'm going to put a title in the top left corner and a short caption below it, and both the title and caption should only occupy the left half of the screen. The name of the organization should be placed in the bottom right corner. poster is about ghana chocolate."
-    pipeline.run(user_text=user_text)
+    result = pipeline.run(user_text=user_text)
+    print(result)
